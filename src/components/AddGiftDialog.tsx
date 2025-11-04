@@ -13,17 +13,21 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { giftSchema } from "@/lib/validations";
+import { z } from "zod";
 
 interface AddGiftDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSuccess: () => void;
+  userId: string | null;
 }
 
 export const AddGiftDialog = ({
   open,
   onOpenChange,
   onSuccess,
+  userId,
 }: AddGiftDialogProps) => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
@@ -42,13 +46,32 @@ export const AddGiftDialog = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title.trim()) {
+    if (!userId) {
       toast({
-        title: "Title required",
-        description: "Please enter a gift title",
+        title: "Authentication required",
+        description: "Please log in to add gifts",
         variant: "destructive",
       });
       return;
+    }
+
+    // Validate input
+    try {
+      giftSchema.parse({
+        title: title.trim(),
+        link: link.trim() || "",
+        description: description.trim() || "",
+        image_url: imageUrl.trim() || "",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Validation Error",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+        return;
+      }
     }
 
     setLoading(true);
@@ -59,6 +82,7 @@ export const AddGiftDialog = ({
         description: description.trim() || null,
         image_url: imageUrl.trim() || null,
         status: "available",
+        owner_id: userId,
       });
 
       if (error) throw error;

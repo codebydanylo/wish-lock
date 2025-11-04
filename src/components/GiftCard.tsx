@@ -17,6 +17,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { guestNameSchema } from "@/lib/validations";
+import { z } from "zod";
 
 interface Gift {
   id: string;
@@ -50,6 +52,20 @@ export const GiftCard = ({ gift, isOwner, onDelete, onUpdate }: GiftCardProps) =
         variant: "destructive",
       });
       return;
+    }
+
+    // Validate guest name
+    try {
+      guestNameSchema.parse(guestName.trim());
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Validation Error",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+        return;
+      }
     }
 
     setLoading(true);

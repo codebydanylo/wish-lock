@@ -21,6 +21,7 @@ export type Database = {
           id: string
           image_url: string | null
           link: string | null
+          owner_id: string | null
           reservation_date: string | null
           reserved_by: string | null
           status: string
@@ -33,6 +34,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           link?: string | null
+          owner_id?: string | null
           reservation_date?: string | null
           reserved_by?: string | null
           status?: string
@@ -45,6 +47,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           link?: string | null
+          owner_id?: string | null
           reservation_date?: string | null
           reserved_by?: string | null
           status?: string

@@ -21,7 +21,7 @@ const Index = () => {
             without duplicates. Simple, elegant, and thoughtful.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/owner">
+            <Link to="/auth">
               <Button size="lg" className="gap-2 min-w-[200px]">
                 <Gift className="w-5 h-5" />
                 Create My Wishlist

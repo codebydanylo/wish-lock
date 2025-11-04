@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { GiftCard } from "@/components/GiftCard";
 import { AddGiftDialog } from "@/components/AddGiftDialog";
-import { Gift, Heart, Share2, ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Gift, Heart, Share2, ArrowLeft, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Gift {
   id: string;
@@ -22,11 +22,34 @@ const Owner = () => {
   const [gifts, setGifts] = useState<Gift[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchGifts();
-  }, []);
+    // Check authentication
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        navigate("/auth");
+      } else {
+        setUserId(session.user.id);
+        fetchGifts();
+      }
+    });
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        navigate("/auth");
+      } else {
+        setUserId(session.user.id);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
 
   const fetchGifts = async () => {
     try {
@@ -80,6 +103,11 @@ const Owner = () => {
     });
   };
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -106,6 +134,10 @@ const Owner = () => {
             <Button onClick={() => setIsAddDialogOpen(true)} className="gap-2">
               <Gift className="w-4 h-4" />
               Add Gift
+            </Button>
+            <Button onClick={handleLogout} variant="outline" className="gap-2">
+              <LogOut className="w-4 h-4" />
+              Logout
             </Button>
           </div>
         </div>
@@ -148,6 +180,7 @@ const Owner = () => {
           open={isAddDialogOpen}
           onOpenChange={setIsAddDialogOpen}
           onSuccess={fetchGifts}
+          userId={userId}
         />
       </div>
     </div>
