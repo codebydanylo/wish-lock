@@ -237,28 +237,32 @@ export const GiftCard = ({ gift, isOwner, onDelete, onUpdate }: GiftCardProps) =
                   Reserve This Gift
                 </Button>
               ) : (
-                <div className="w-full flex gap-2">
+                <div className="w-full space-y-2">
                   <Input
                     placeholder="Your name"
                     value={guestName}
                     onChange={(e) => setGuestName(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleReserve()}
                     disabled={loading}
+                    className="w-full"
                   />
-                  <Button onClick={handleReserve} disabled={loading} size="sm">
-                    Confirm
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setShowReserveInput(false);
-                      setGuestName("");
-                    }}
-                    disabled={loading}
-                    size="sm"
-                  >
-                    Cancel
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button onClick={handleReserve} disabled={loading} size="sm" className="flex-1">
+                      Confirm
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setShowReserveInput(false);
+                        setGuestName("");
+                      }}
+                      disabled={loading}
+                      size="sm"
+                      className="flex-1"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
                 </div>
               )
             ) : (

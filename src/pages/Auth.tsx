@@ -93,18 +93,18 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <div className="container mx-auto px-4 py-8 max-w-md">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-md">
         <Link to="/">
-          <Button variant="ghost" className="mb-4">
+          <Button variant="ghost" className="mb-4 sm:mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
 
-        <div className="bg-card rounded-lg shadow-card p-8">
+        <div className="bg-card rounded-lg shadow-card p-6 sm:p-8">
           <div className="flex items-center justify-center mb-6">
-            <Heart className="w-8 h-8 text-primary mr-2" />
-            <h1 className="text-3xl font-bold">
+            <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-primary mr-2" />
+            <h1 className="text-2xl sm:text-3xl font-bold">
               {isLogin ? "Welcome Back" : "Create Account"}
             </h1>
           </div>

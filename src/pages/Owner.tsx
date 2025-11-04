@@ -110,32 +110,34 @@ const Owner = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-6xl">
         <Link to="/">
-          <Button variant="ghost" className="mb-4">
+          <Button variant="ghost" className="mb-4 sm:mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
 
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div className="flex flex-col gap-4 sm:gap-5 mb-6 sm:mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2 flex items-center gap-2">
-              <Heart className="w-8 h-8 text-primary" />
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 flex items-center gap-2">
+              <Heart className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary" />
               My Wishlist
             </h1>
-            <p className="text-muted-foreground">Manage your gift wishlist</p>
+            <p className="text-sm sm:text-base text-muted-foreground">Manage your gift wishlist</p>
           </div>
-          <div className="flex gap-3">
-            <Button onClick={handleShare} variant="outline" className="gap-2">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            <Button onClick={handleShare} variant="outline" className="gap-2 flex-1 sm:flex-none" size="sm">
               <Share2 className="w-4 h-4" />
-              Share Link
+              <span className="hidden xs:inline">Share Link</span>
+              <span className="xs:hidden">Share</span>
             </Button>
-            <Button onClick={() => setIsAddDialogOpen(true)} className="gap-2">
+            <Button onClick={() => setIsAddDialogOpen(true)} className="gap-2 flex-1 sm:flex-none" size="sm">
               <Gift className="w-4 h-4" />
-              Add Gift
+              <span className="hidden xs:inline">Add Gift</span>
+              <span className="xs:hidden">Add</span>
             </Button>
-            <Button onClick={handleLogout} variant="outline" className="gap-2">
+            <Button onClick={handleLogout} variant="outline" className="gap-2 w-full sm:w-auto" size="sm">
               <LogOut className="w-4 h-4" />
               Logout
             </Button>

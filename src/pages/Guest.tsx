@@ -49,20 +49,20 @@ const Guest = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-6xl">
         <Link to="/">
-          <Button variant="ghost" className="mb-4">
+          <Button variant="ghost" className="mb-4 sm:mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
         </Link>
 
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2 flex items-center gap-2">
-            <Heart className="w-8 h-8 text-primary" />
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 flex items-center gap-2">
+            <Heart className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary" />
             Gift Wishlist
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground">
             Choose a gift to reserve - only one person can claim each gift!
           </p>
         </div>
