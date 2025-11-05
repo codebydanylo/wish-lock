@@ -14,10 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      events: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_date: string | null
+          id: string
+          owner_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          owner_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          owner_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       gifts: {
         Row: {
           created_at: string
           description: string | null
+          event_id: string | null
           id: string
           image_url: string | null
           link: string | null
@@ -31,6 +62,7 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
+          event_id?: string | null
           id?: string
           image_url?: string | null
           link?: string | null
@@ -44,6 +76,7 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
+          event_id?: string | null
           id?: string
           image_url?: string | null
           link?: string | null
@@ -54,7 +87,15 @@ export type Database = {
           title?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "gifts_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

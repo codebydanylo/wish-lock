@@ -21,6 +21,7 @@ interface AddGiftDialogProps {
   onOpenChange: (open: boolean) => void;
   onSuccess: () => void;
   userId: string | null;
+  eventId?: string;
 }
 
 export const AddGiftDialog = ({
@@ -28,6 +29,7 @@ export const AddGiftDialog = ({
   onOpenChange,
   onSuccess,
   userId,
+  eventId,
 }: AddGiftDialogProps) => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
@@ -83,6 +85,7 @@ export const AddGiftDialog = ({
         image_url: imageUrl.trim() || null,
         status: "available",
         owner_id: userId,
+        event_id: eventId || null,
       });
 
       if (error) throw error;
