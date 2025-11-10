@@ -110,21 +110,21 @@ const Index = () => {
         {/* How It Works */}
         <div className="mt-12 sm:mt-16">
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
-            <div className="order-2 md:order-1">
+            <div className="order-2 md:order-1 animate-fade-in">
               <img 
                 src={sharingIllustration} 
                 alt="People sharing gifts" 
-                className="w-full rounded-2xl shadow-card"
+                className="w-full rounded-2xl shadow-card hover:scale-105 transition-transform duration-300"
               />
             </div>
             <div className="order-1 md:order-2 space-y-4 sm:space-y-6">
-              <div>
+              <div className="animate-fade-in">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-2">How It Works</h2>
                 <p className="text-muted-foreground">Simple steps for everyone</p>
               </div>
               <div className="space-y-3">
-                <div className="flex gap-3">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">
+                <div className="flex gap-3 animate-fade-in opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards] group cursor-default">
+                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold group-hover:scale-110 transition-transform duration-300 animate-pulse">
                     1
                   </div>
                   <div>
@@ -132,8 +132,8 @@ const Index = () => {
                     <p className="text-sm text-muted-foreground">Make your wishlist and share the link</p>
                   </div>
                 </div>
-                <div className="flex gap-3">
-                  <div className="bg-success text-success-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">
+                <div className="flex gap-3 animate-fade-in opacity-0 [animation-delay:400ms] [animation-fill-mode:forwards] group cursor-default">
+                  <div className="bg-success text-success-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold group-hover:scale-110 transition-transform duration-300 animate-pulse [animation-delay:300ms]">
                     2
                   </div>
                   <div>
@@ -141,8 +141,8 @@ const Index = () => {
                     <p className="text-sm text-muted-foreground">Friends pick and reserve gifts</p>
                   </div>
                 </div>
-                <div className="flex gap-3">
-                  <div className="bg-accent text-accent-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">
+                <div className="flex gap-3 animate-fade-in opacity-0 [animation-delay:600ms] [animation-fill-mode:forwards] group cursor-default">
+                  <div className="bg-accent text-accent-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold group-hover:scale-110 transition-transform duration-300 animate-pulse [animation-delay:600ms]">
                     3
                   </div>
                   <div>
