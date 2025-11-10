@@ -1,42 +1,10 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Gift, Heart, Users, Shield } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
+import { Gift, Users, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroGifts from "@/assets/hero-gifts.jpg";
 import sharingIllustration from "@/assets/sharing-illustration.jpg";
 
 const Index = () => {
-  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { toast } = useToast();
-
-  const handlePasswordSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === "4") {
-      setShowPasswordDialog(false);
-      setPassword("");
-      navigate("/auth");
-    } else {
-      toast({
-        title: "Wrong password",
-        description: "Please try again",
-        variant: "destructive",
-      });
-      setPassword("");
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-hero">
@@ -57,14 +25,15 @@ const Index = () => {
             Share gifts. No duplicates. Simple.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-            <Button 
-              size="lg" 
-              className="gap-2 w-full sm:w-auto sm:min-w-[200px]"
-              onClick={() => setShowPasswordDialog(true)}
-            >
-              <Gift className="w-4 h-4 sm:w-5 sm:h-5" />
-              Create My Wishlist
-            </Button>
+            <Link to="/auth" className="w-full sm:w-auto">
+              <Button 
+                size="lg" 
+                className="gap-2 w-full sm:min-w-[200px]"
+              >
+                <Gift className="w-4 h-4 sm:w-5 sm:h-5" />
+                Create My Wishlist
+              </Button>
+            </Link>
             <Link to="/guest" className="w-full sm:w-auto">
               <Button size="lg" variant="outline" className="gap-2 w-full sm:min-w-[200px]">
                 <Users className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -156,44 +125,6 @@ const Index = () => {
         </div>
       </div>
 
-      <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
-        <DialogContent className="sm:max-w-md">
-          <form onSubmit={handlePasswordSubmit}>
-            <DialogHeader>
-              <DialogTitle>Enter Password</DialogTitle>
-              <DialogDescription>
-                Please enter the password to create your wishlist
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter password"
-                  autoFocus
-                />
-              </div>
-            </div>
-            <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => {
-                  setShowPasswordDialog(false);
-                  setPassword("");
-                }}
-              >
-                Cancel
-              </Button>
-              <Button type="submit">Continue</Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
