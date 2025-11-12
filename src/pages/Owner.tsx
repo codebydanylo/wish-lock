@@ -65,9 +65,14 @@ const Owner = () => {
 
   const fetchEvents = async () => {
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) return;
+
       const { data: eventsData, error: eventsError } = await supabase
         .from("events")
         .select("*")
+        .eq("owner_id", user.id)
         .order("created_at", { ascending: false });
 
       if (eventsError) throw eventsError;
