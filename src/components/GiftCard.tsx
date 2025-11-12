@@ -17,7 +17,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { guestNameSchema } from "@/lib/validations";
+import { guestNameSchema, GIFT_CATEGORIES } from "@/lib/validations";
 import { z } from "zod";
 
 interface Gift {
@@ -29,6 +29,7 @@ interface Gift {
   status: string;
   reserved_by: string | null;
   reservation_date: string | null;
+  category?: string | null;
 }
 
 interface GiftCardProps {
@@ -135,6 +136,7 @@ export const GiftCard = ({ gift, isOwner, onDelete, onUpdate }: GiftCardProps) =
   };
 
   const isAvailable = gift.status === "available";
+  const categoryInfo = GIFT_CATEGORIES.find(c => c.value === gift.category) || GIFT_CATEGORIES[8];
 
   return (
     <Card className="overflow-hidden transition-all hover:shadow-elevated duration-300 bg-gradient-card">
@@ -155,7 +157,7 @@ export const GiftCard = ({ gift, isOwner, onDelete, onUpdate }: GiftCardProps) =
       </CardHeader>
 
       <CardContent className="p-4">
-        <div className="flex items-start justify-between gap-2 mb-3">
+        <div className="flex items-start justify-between gap-2 mb-2">
           <h3 className="font-semibold text-lg line-clamp-2">{gift.title}</h3>
           <Badge
             variant={isAvailable ? "default" : "secondary"}
@@ -167,6 +169,13 @@ export const GiftCard = ({ gift, isOwner, onDelete, onUpdate }: GiftCardProps) =
               <XCircle className="w-3 h-3 mr-1" />
             )}
             {isAvailable ? "Available" : "Reserved"}
+          </Badge>
+        </div>
+
+        <div className="mb-3">
+          <Badge variant="outline" className="text-xs">
+            <span className="mr-1">{categoryInfo.icon}</span>
+            {categoryInfo.label}
           </Badge>
         </div>
 

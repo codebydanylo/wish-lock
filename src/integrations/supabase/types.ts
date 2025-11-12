@@ -46,6 +46,7 @@ export type Database = {
       }
       gifts: {
         Row: {
+          category: string | null
           created_at: string
           description: string | null
           event_id: string | null
@@ -60,6 +61,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          category?: string | null
           created_at?: string
           description?: string | null
           event_id?: string | null
@@ -74,6 +76,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          category?: string | null
           created_at?: string
           description?: string | null
           event_id?: string | null

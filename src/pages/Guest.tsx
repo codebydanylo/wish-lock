@@ -25,6 +25,7 @@ interface Gift {
   reserved_by: string | null;
   reservation_date: string | null;
   event_id: string | null;
+  category?: string | null;
 }
 
 const Guest = () => {

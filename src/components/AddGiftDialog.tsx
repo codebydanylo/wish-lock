@@ -13,8 +13,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { giftSchema } from "@/lib/validations";
+import { giftSchema, GIFT_CATEGORIES } from "@/lib/validations";
 import { z } from "zod";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface AddGiftDialogProps {
   open: boolean;
@@ -35,6 +42,7 @@ export const AddGiftDialog = ({
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [category, setCategory] = useState("other");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -43,6 +51,7 @@ export const AddGiftDialog = ({
     setLink("");
     setDescription("");
     setImageUrl("");
+    setCategory("other");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,6 +73,7 @@ export const AddGiftDialog = ({
         link: link.trim() || "",
         description: description.trim() || "",
         image_url: imageUrl.trim() || "",
+        category: category,
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -83,6 +93,7 @@ export const AddGiftDialog = ({
         link: link.trim() || null,
         description: description.trim() || null,
         image_url: imageUrl.trim() || null,
+        category: category,
         status: "available",
         owner_id: userId,
         event_id: eventId || null,
@@ -134,6 +145,27 @@ export const AddGiftDialog = ({
                 disabled={loading}
                 required
               />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="category">
+                Категория <span className="text-destructive">*</span>
+              </Label>
+              <Select value={category} onValueChange={setCategory} disabled={loading}>
+                <SelectTrigger className="bg-background">
+                  <SelectValue placeholder="Выберите категорию" />
+                </SelectTrigger>
+                <SelectContent className="bg-popover z-50">
+                  {GIFT_CATEGORIES.map((cat) => (
+                    <SelectItem key={cat.value} value={cat.value}>
+                      <span className="flex items-center gap-2">
+                        <span>{cat.icon}</span>
+                        <span>{cat.label}</span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="grid gap-2">

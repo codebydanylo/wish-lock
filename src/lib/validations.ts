@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+export const GIFT_CATEGORIES = [
+  { value: "electronics", label: "Электроника", icon: "💻" },
+  { value: "clothing", label: "Одежда", icon: "👕" },
+  { value: "books", label: "Книги", icon: "📚" },
+  { value: "toys", label: "Игрушки", icon: "🧸" },
+  { value: "home", label: "Для дома", icon: "🏠" },
+  { value: "sports", label: "Спорт", icon: "⚽" },
+  { value: "beauty", label: "Красота", icon: "💄" },
+  { value: "food", label: "Еда", icon: "🍰" },
+  { value: "other", label: "Другое", icon: "🎁" },
+] as const;
+
 export const giftSchema = z.object({
   title: z
     .string()
@@ -28,6 +40,17 @@ export const giftSchema = z.object({
     .max(2000, "URL too long")
     .optional()
     .or(z.literal("")),
+  category: z.enum([
+    "electronics",
+    "clothing", 
+    "books",
+    "toys",
+    "home",
+    "sports",
+    "beauty",
+    "food",
+    "other"
+  ]).default("other"),
 });
 
 export const guestNameSchema = z
