@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Gift, Users, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroCelebration from "@/assets/hero-celebration.png";
-import sharingIllustration from "@/assets/sharing-illustration.jpg";
+import howItWorks from "@/assets/how-it-works.png";
 
 const Index = () => {
 
@@ -81,8 +81,8 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
             <div className="order-2 md:order-1 animate-fade-in">
               <img 
-                src={sharingIllustration} 
-                alt="People sharing gifts" 
+                src={howItWorks} 
+                alt="How it works - Start, Explore, Save, Enjoy" 
                 className="w-full rounded-2xl shadow-card hover:scale-105 transition-transform duration-300"
               />
             </div>
