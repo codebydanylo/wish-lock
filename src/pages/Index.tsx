@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Gift, Users, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroGifts from "@/assets/hero-gifts.jpg";
+import heroCelebration from "@/assets/hero-celebration.png";
 import sharingIllustration from "@/assets/sharing-illustration.jpg";
 
 const Index = () => {
@@ -13,8 +13,8 @@ const Index = () => {
         <div className="text-center mb-8 sm:mb-10">
           <div className="mb-6 sm:mb-8 rounded-2xl overflow-hidden shadow-card max-w-3xl mx-auto">
             <img 
-              src={heroGifts} 
-              alt="Beautiful gift boxes" 
+              src={heroCelebration} 
+              alt="Celebrate with us - colorful celebration banner" 
               className="w-full h-48 sm:h-64 md:h-80 object-cover"
             />
           </div>
